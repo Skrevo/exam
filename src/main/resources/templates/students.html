@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Students</title>
+  <th:block th:insert="~{fragments/headSettings::headSettings}"></th:block>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="/clientsAddJquery.js"></script>
+</head>
+<body>
+<th:block th:insert="~{fragments/pageHeader::pageHeader}"></th:block>
+</div>
+<div class="table" id="tableOutput">
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Surname</th>
+      <th>Name</th>
+      <th>Patronymic</th>
+      <th>Email</th>
+    </tr>
+    <tr th:each="student:${students}">
+      <td th:utext="${student.id}"></td>
+      <td th:utext="${student.surname}"></td>
+      <td th:utext="${student.name}"></td>
+      <td th:utext="${student.patronymic}"></td>
+      <td th:utext="${student.email}"></td>
+      <td>
+        <form th:action="@{/openStudentForm}" method="post">
+          <input type="hidden" name="id" th:value="${student.id}">
+          <input type="submit" value="&#8942;">
+        </form>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>
