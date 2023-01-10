@@ -34,9 +34,9 @@ public class HomeWork {
     @Column(nullable = false, columnDefinition = "int(1) default 0")
     private Grade grade;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id", nullable = false,
-            foreignKey = @ForeignKey(name = "FK_homeworks_students"))
-    private Student student;
+    @JoinColumn(name = "user_id", nullable = false,
+            foreignKey = @ForeignKey(name = "FK_homeworks_users"))
+    private User user;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate passDate;
 
@@ -59,7 +59,7 @@ public class HomeWork {
                 "id=" + id +
                 ", homework='" + homework + '\'' +
                 ", grade=" + grade +
-                ", student=" + student +
+                ", student=" + user +
                 ", passDate=" + passDate +
                 '}';
     }

@@ -1,12 +1,10 @@
 package com.example.demo.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -14,8 +12,13 @@ import java.util.Objects;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "teachers")
-public class Teacher {
+@Table(name = "users")
+public class User {
+
+    public enum Role {
+        STUDENT,
+        TEACHER
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -31,30 +34,36 @@ public class Teacher {
     private String password;
     @Column(nullable = false, unique = true)
     private String email;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<HomeWork> homeworks;
+    @Column(nullable = false, columnDefinition = "int(1) default 0")
+    private Role role;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Teacher teacher = (Teacher) o;
-        return Objects.equals(id, teacher.id) && Objects.equals(surname, teacher.surname) && Objects.equals(name, teacher.name) && Objects.equals(patronymic, teacher.patronymic) && Objects.equals(username, teacher.username) && Objects.equals(password, teacher.password) && Objects.equals(email, teacher.email);
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(surname, user.surname) && Objects.equals(name, user.name) && Objects.equals(patronymic, user.patronymic) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(role, user.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, surname, name, patronymic, username, password, email);
+        return Objects.hash(id, surname, name, patronymic, username, password, email, role);
     }
 
     @Override
     public String toString() {
-        return "Teacher{" +
+        return "Student{" +
                 "id=" + id +
                 ", surname='" + surname + '\'' +
                 ", name='" + name + '\'' +
                 ", patronymic='" + patronymic + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", mail='" + email + '\'' +
+                ", email='" + email + '\'' +
+                ", homeworks=" + homeworks + '\'' +
+                ", role=" + role +
                 '}';
     }
 }

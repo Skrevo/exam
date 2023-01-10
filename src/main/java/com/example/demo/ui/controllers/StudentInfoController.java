@@ -1,9 +1,9 @@
 package com.example.demo.ui.controllers;
 
 import com.example.demo.models.HomeWork;
-import com.example.demo.models.Student;
+import com.example.demo.models.User;
 import com.example.demo.services.data.HomeWorkService;
-import com.example.demo.services.data.StudentService;
+import com.example.demo.services.data.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,16 +18,16 @@ import org.springframework.web.servlet.ModelAndView;
 public class StudentInfoController {
 
     @Autowired
-    private StudentService studentService;
+    private UserService userService;
 
     @Autowired
     private HomeWorkService homeWorkService;
 
     @GetMapping("studentInfo")
     public String load(@RequestParam("id") Integer id, Model model) {
-        Student student = studentService.findById(id);
-        model.addAttribute("student", student);
-        model.addAttribute("homeworks", student.getHomeworks());
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        model.addAttribute("homeworks", user.getHomeworks());
         model.addAttribute("grades", HomeWork.Grade.values());
         return "studentInfo";
     }
@@ -39,15 +39,15 @@ public class StudentInfoController {
 
     @PostMapping("updateStudentForm")
     public ModelAndView updateContactForm(
-            @ModelAttribute Student student,
+            @ModelAttribute User user,
             @ModelAttribute HomeWork homeWork
     ){
         homeWork.setId(homeWork.getId());
-        homeWork.setStudent(student);
+        homeWork.setUser(user);
         homeWork.setHomework(homeWork.getHomework());
         homeWorkService.save(homeWork);
-        studentService.save(student);
+        userService.save(user);
         return new ModelAndView("redirect:studentInfo",
-                new ModelMap("id", student.getId()));
+                new ModelMap("id", user.getId()));
     }
 }

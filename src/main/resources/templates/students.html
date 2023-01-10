@@ -19,15 +19,15 @@
       <th>Patronymic</th>
       <th>Email</th>
     </tr>
-    <tr th:each="student:${students}">
-      <td th:utext="${student.id}"></td>
-      <td th:utext="${student.surname}"></td>
-      <td th:utext="${student.name}"></td>
-      <td th:utext="${student.patronymic}"></td>
-      <td th:utext="${student.email}"></td>
+    <tr th:each="user:${users}">
+      <td th:utext="${user.id}"></td>
+      <td th:utext="${user.surname}"></td>
+      <td th:utext="${user.name}"></td>
+      <td th:utext="${user.patronymic}"></td>
+      <td th:utext="${user.email}"></td>
       <td>
         <form th:action="@{/openStudentForm}" method="post">
-          <input type="hidden" name="id" th:value="${student.id}">
+          <input type="hidden" name="id" th:value="${user.id}">
           <input type="submit" value="&#8942;">
         </form>
       </td>

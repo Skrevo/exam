@@ -1,7 +1,7 @@
 package com.example.demo.ui.controllers;
 
-import com.example.demo.models.Student;
-import com.example.demo.services.data.StudentService;
+import com.example.demo.models.User;
+import com.example.demo.services.data.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +16,12 @@ import java.util.List;
 public class StudentController {
 
     @Autowired
-    public StudentService studentService;
+    public UserService userService;
 
     @GetMapping("students")
     public String load(Model model) {
-        List<Student> list = studentService.findAll();
-        model.addAttribute("students", list);
+        List<User> list = userService.findAll();
+        model.addAttribute("users", list);
         return "students";
     }
 
