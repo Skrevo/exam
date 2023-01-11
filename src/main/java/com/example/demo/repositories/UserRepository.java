@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findAllBySurnameAndNameAndPatronymic (String surname, String name, String patronymic);
+
+    User findByUsername (String username);
 }

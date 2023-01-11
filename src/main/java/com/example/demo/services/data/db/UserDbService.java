@@ -43,4 +43,9 @@ public class UserDbService implements UserService {
     public List<User> saveAll(List<User> users) {
         return userRepository.saveAll(users);
     }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }

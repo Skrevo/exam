@@ -20,7 +20,7 @@ public class StudentController {
 
     @GetMapping("students")
     public String load(Model model) {
-        List<User> list = userService.findAll();
+        List<User> list = userService.findAll().stream().filter(user -> user.getRole().equals(User.Role.STUDENT)).toList();
         model.addAttribute("users", list);
         return "students";
     }
