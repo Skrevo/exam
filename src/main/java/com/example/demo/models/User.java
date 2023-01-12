@@ -1,8 +1,9 @@
 package com.example.demo.models;
 
-import jakarta.persistence.*;
+
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
@@ -62,7 +63,6 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", homeworks=" + homeworks + '\'' +
                 ", role=" + role +
                 '}';
     }

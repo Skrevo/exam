@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Work</title>
+</head>
+<body>
+<header>
+</header>
+<div>
+    <form th:action="@{/updateHomeworkForm}" method="post">
+        <div>
+            <h2 style="background: aqua">Home Work</h2>
+            <input type="text" name="id" readonly th:value="${homework.id}">
+            <input type="text" name="homework" placeholder="Your home work" th:value="${homework.homework}">
+            <input type="date" name="passDate" readonly th:value="${homework.passDate}">
+            <input type="text" name="grade" readonly placeholder="grade" th:value="${homework.grade}">
+        </div>
+        <input type="submit" value="SAVE">
+    </form>
+</div>
+</body>
+</html>

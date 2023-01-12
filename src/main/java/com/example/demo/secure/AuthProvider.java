@@ -12,7 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Set;
 
 @Component
 public class AuthProvider implements AuthenticationProvider {
@@ -25,17 +25,17 @@ public class AuthProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         User user = userService.findByUsername(authentication.getName());
-        if (user != null)
+        if (user == null)
             throw new BadCredentialsException("wrong username");
-        if (passwordEncoder.matches(
-                (String)authentication.getCredentials(),
+        if (!passwordEncoder.matches(
+                (String) authentication.getCredentials(),
                 user.getPassword()))
             throw new BadCredentialsException("wrong password");
-        return new UsernamePasswordAuthenticationToken(user, authentication.getCredentials(), List.of(new SimpleGrantedAuthority(user.getRole().name())));
+        return new UsernamePasswordAuthenticationToken(user, authentication.getCredentials(), Set.of(new SimpleGrantedAuthority(user.getRole().name())));
     }
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return false;
+        return true;
     }
 }

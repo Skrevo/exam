@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Account</title>
+    <th:block th:insert="~{fragments/headSettings::headSettings}"></th:block>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<th:block th:insert="~{fragments/pageHeader::pageHeader}"></th:block>
+</div>
+<div class="table" id="tableHomeWorks">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Home Work</th>
+            <th>Pass Date</th>
+            <th>Grade</th>
+        </tr>
+        <tr th:each="homework:${homeworks}">
+            <td th:utext="${homework.id}"></td>
+            <td th:utext="${homework.homework}"></td>
+            <td th:utext="${homework.passDate}"></td>
+            <td th:utext="${homework.grade}"></td>
+            <td>
+                <form th:action="@{/updateHomework}" method="post">
+                    <input type="hidden" name="id" th:value="${homework.id}">
+                    <input type="submit" value="&#8942;">
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -31,29 +31,33 @@ public class SecurityConfig {
                 .and().build();
 
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
-                .requestMatchers(
-                        "/error",
-                        "/registration"
+                .antMatchers(
+                        "/error"
+
                 )
                 .permitAll()
                 //
-                .requestMatchers(
+                .antMatchers(
                         "/",
-                        "/students"
+                        "myAccount"
+
                 )
                 .authenticated()
                 //
-                .requestMatchers(
-                        "/studentInfo"
+                .antMatchers(
+                        "/studentInfo",
+                        "/students"
                 )
                 .hasAnyAuthority(
                         TEACHER.name()
                 )
                 //
+
                 .and()
                 .formLogin()
                 .loginPage(
